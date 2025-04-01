@@ -1,0 +1,37 @@
+Directed Graph
+    When the connections between nodes go both ways. i.e facebook users
+Undirected Graph
+    When the connection between nodes goes one way. i.e. internet webpage might link might link to a page that doesn't link back
+Degree of a node
+    Denotes the number of edges connected to a node
+    
+    In an directed graph, degree is denoted in the following manner
+    Indegree
+        Number of edges that point to the node
+    Outdegree
+        Number of eges that point from from the node
+
+Weighted Graph
+    When the edges of a graph have a value attached. I.e distance between cities could vary and can be represented on the edges     
+Unweighted Graph
+    When edges are all the same. They have no Weighted
+
+Cyclic Graph
+    Means there is at lease one path back to the origin node
+Asyclic Graph
+    Means there is no path back to the origin node
+Both Cyclic and Asyclic Graphs can be Directed or Undirected
+
+Dense Graph
+    Where there is close to the maximum number of connections/edges
+
+Sparse Graph
+    Where edges are minimal
+
+Self Loop
+Multi Edge Graphs
+
+Simple Graph
+    Has no self loops and no multi edges
+
+In a simple directed graph n*(n-1) where n is the number of nodes
