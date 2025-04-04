@@ -11,3 +11,15 @@ O(n + 500 + n^3 + n^2)  -------> drop the smallest ------> O(n^3)
 
 O(5n^2 + 100n + 17) ----> apply product rule first ------> O(n^2 + n + 1) ------> then apply sum rule -----> O(n^2)
 O((n/3)^6 + 10n) ----> apply product rule first ------> O(n^6 + n) ------> then apply sum rule -----> O(n^6)
+
+
+Complexity Hierarchy
+    Big or            Class
+    O(1)              Constant
+    O(log(n))         logarithmic
+    O(n)              linear
+    O(n*log(n))       loglinear
+    O(n^c)            polynomial
+    O(c^n)            exponential
+    O(n!)             factorial
+

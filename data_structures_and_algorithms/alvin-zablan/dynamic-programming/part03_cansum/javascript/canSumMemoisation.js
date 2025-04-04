@@ -12,21 +12,26 @@ A node with the value 0(zero) represents a succesful path of nodes leading to th
 canSum(7, [5, 3, 4, 7])
 */
 
-const canSum = (targetSum, numbers) => {
+const canSum = (targetSum, numbers, memo = {}) => {
   //Keeping the below line of code as a reminder on how to print out an object
   /*
     str = JSON.stringify(memo, null, 4); // (Optional) beautiful indented output.
     console.log(str);
   */
+  if (targetSum in memo) {
+    return memo[targetSum];
+  }
   if (targetSum === 0) return true;
   if (targetSum < 0) return false;
 
   for (let num of numbers) {
     const remainder = targetSum - num;
-    if (canSum(remainder, numbers) === true) {
+    if (canSum(remainder, numbers, memo) === true) {
+      memo[targetSum] = true;
       return true;
     }
   }
+  memo[targetSum] = false;
   return false;
 };
 
