@@ -3,14 +3,17 @@ public class GreatestDifference {
   // y > x  and y comes after x in the array 
 
   public static void main(String[] args) {
-    // System.out.println(getGreatestDifference(new int[]{2, 3, 7, 9, 1}));
+    // System.out.println(getGreatestDifferenceV2(new int[]{2, 3, 7, 9, 1}));
+    // System.out.println(getGreatestDifferenceV2(new int[]{2, 3, 7, 9, 1, 14, 0}));
     // System.out.println(getGreatestDifference(new int[]{2, 3, 7, 9, 1, 12, 4, 32, 43, 12, 11, 2, 17}));
     // System.out.println(getGreatestDifference(new int[]{12, 4, 32, 43, 12, 11, 2, 17}));
   
-    System.out.println(getGreatestDifferenceV2(new int[]{2, 3, 7, 9, 1}));
-    System.out.println(getGreatestDifferenceV2(new int[]{2, 3, 7, 9, 1, 14, 0}));
+    // System.out.println(getGreatestDifferenceV2(new int[]{2, 3, 7, 9, 1}));
+    // System.out.println(getGreatestDifferenceV2(new int[]{2, 3, 7, 9, 1, 14, 0}));
     // System.out.println(getGreatestDifferenceV2(new int[]{2, 3, 7, 9, 1, 12, 4, 32, 43, 12, 11, 2, 17}));
     // System.out.println(getGreatestDifferenceV2(new int[]{12, 4, 32, 43, 12, 11, 2, 17}));
+    System.out.println(getGreatestDifference(new int[]{19, 14, 11, 9, 1}));
+    System.out.println(getGreatestDifferenceV2(new int[]{19, 14, 11, 9, 1}));
   }
     
   /* BRUTE FORCE approach has a time complexity of n^2 because of the inner for loop on the input n */
@@ -57,8 +60,9 @@ public class GreatestDifference {
           }
           
         }
-        System.out.println("Min Element: " + minElement);
-        return maxDiff;
+        // System.out.println("Min Element: " + minElement);
+        
+        return maxDiff <= 0? -1 : maxDiff;
       }
   
 }
