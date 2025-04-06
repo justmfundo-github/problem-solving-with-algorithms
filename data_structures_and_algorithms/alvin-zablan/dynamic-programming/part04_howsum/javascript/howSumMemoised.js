@@ -9,23 +9,23 @@
   Note that as the targetSum grows, the ability to compute this value diminishes exponentially. To combat that, we use memoisation.
 */
 
-const howSum = (targetSum, numbers) => {
+const howSum = (targetSum, numbers, memo = {}) => {
   //base cases
-
+  if (targetSum in memo) return memo[targetSum];
   if (targetSum === 0) return []; //return empty array
   if (targetSum < 0) return null; //return null
 
   for (let num of numbers) {
     const remainder = targetSum - num;
-    const remainderResult = howSum(remainder, numbers);
+    const remainderResult = howSum(remainder, numbers, memo);
     if (remainderResult !== null) {
       //add the remainder to the return array
-
-      return [...remainderResult, num]; // cost of this operation is m (i.e. if you used one to get to targetSum)
+      memo[targetSum] = [...remainderResult, num];
+      return memo[targetSum];
     }
   }
-
-  return null;
+  memo[targetSum] = null;
+  return memo[targetSum];
 };
 
 // m = target sum
