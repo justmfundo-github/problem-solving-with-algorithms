@@ -10,7 +10,7 @@ public class Fibonacci{
 
     //Although this solution to the fibonacci problem works. The moment you put in a large value for n, 
     //there is a significant delay before getting the result. The solution is not efficient.
-    System.out.println(calcFibonacci(50));    
+    //System.out.println(calcFibonacci(50));    
   }
 
   public static long calcFibonacci(int n){
