@@ -3,6 +3,7 @@
    destination node.
 */
 
+/* Stack approach. I.e. Using Depth First Search */
 const hasPathDepthFirstRecursive = (graph, src, dst) => {
   if (src === dst) return true;
 
@@ -14,15 +15,16 @@ const hasPathDepthFirstRecursive = (graph, src, dst) => {
   return false;
 };
 
-/* NB: Bread first search cannot be implemented RECURSIVELY on a graph */
+/* NB: Breadth first search cannot be implemented RECURSIVELY for a graph */
 const hasPathBreadthFirst = (graph, src, dst) => {
   const queue = [src];
 
   while (queue.length > 0) {
-    if (queue.shift() === dst) {
+    const current = queue.shift();
+    if (current === dst) {
       return true;
     }
-    for (let neighbour of graph[src]) {
+    for (let neighbour of graph[current]) {
       queue.push(neighbour);
     }
   }
@@ -38,5 +40,8 @@ const graph = {
   k: [],
 };
 
+console.log("******************** Depth First Search Recursive ********************");
 console.log(hasPathDepthFirstRecursive(graph, "f", "k"));
+
+console.log("******************** Breadth First Search Queue ********************");
 console.log(hasPathBreadthFirst(graph, "f", "k"));
