@@ -7,7 +7,7 @@ const undirectedPath = (edges, nodeA, nodeB) => {
   return hasPath(graph, nodeA, nodeB, new Set());
 };
 
-// Let's build this solution using a good old stack this time...
+// Let's build this solution using a good old stack instead of doing iit recursively this time...
 const hasPath = (graph, src, dst, visited) => {
   const stack = [src];
 
