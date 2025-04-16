@@ -4,7 +4,10 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 public class UndirectedGraphHasPath {
   public static void main(String[] args) {
@@ -17,14 +20,53 @@ public class UndirectedGraphHasPath {
       {'o', 'n'}};    
 
       // Lets start by building an adjacency graph object
-      Map<Character, ArrayList<String>> graph = new HashMap<Character, ArrayList<String>>();
+      Map<Character, ArrayList<Character>> graph = new HashMap<Character, ArrayList<Character>>();
       graph = buildGraph(arrayOfEdges);
       System.out.println(graph);
+
+      char nodeA = 'j';
+      char nodeB = 'm';
+
+      // So now we can call on the function to check whether or not a path exists between two nodes
+      boolean hasPath = hasPathStackSolution(graph, nodeA, nodeB);
+      System.out.println("Path between " + nodeA + " and " + nodeB + ":\t" + hasPath);
   }
 
-  private static Map<Character, ArrayList<String>> buildGraph(char[][] arrayOfEdges) {
-    Map<Character, ArrayList<String>> graph = new HashMap<Character, ArrayList<String>>();
+  private static boolean hasPathStackSolution(Map<Character, ArrayList<Character>> graph, char start, char destination) {
+    // since this is an undirected graph, we may end up on nodes that have already been processed. Avoid this
+    // by storing seen nodes in a set and checking first if the node has been seen
+    Set<Character> visitedCharSet = new HashSet<Character>();
 
+    Stack<Character> nodeStack = new Stack<>();
+    nodeStack.push(start);
+
+    while(nodeStack.size() > 0){
+      // Lets process whichever node is on the top of the stack
+      char currentNode = nodeStack.pop(); // remove node from the top of the stack
+      System.out.println("Popping.... " + currentNode);
+      if(visitedCharSet.contains(currentNode)){
+        System.out.println("Been here before...Removing...:  " + currentNode);
+        // nodeStack.pop();
+        continue;
+      }   // check to see if we've visited this node already
+      visitedCharSet.add(currentNode);    // make a note that the node has been seen
+
+      System.out.println(currentNode + "----||||-----" + destination);
+      if(currentNode == destination){return true;}  // check if this node is equal to our destination node
+
+      for(char neighbour : graph.get(currentNode)){
+        nodeStack.push(neighbour);
+        System.out.println("Pushing...  " + neighbour);
+      }
+    }
+    System.out.println(visitedCharSet);
+    return false;
+  }
+
+  
+  
+  private static Map<Character, ArrayList<Character>> buildGraph(char[][] arrayOfEdges) {
+    Map<Character, ArrayList<Character>> graph = new HashMap<Character, ArrayList<Character>>();
 
     for (char edge[] : arrayOfEdges) {
       if( !graph.containsKey(edge[0])){
@@ -33,14 +75,16 @@ public class UndirectedGraphHasPath {
       if( !graph.containsKey(edge[1])){
         graph.put(edge[1], new ArrayList<>());
       }      
-      graph.put(edge[0], addToArrayList(graph.get(edge[0]), Character.toString(edge[1])));
-      graph.put(edge[1], addToArrayList(graph.get(edge[1]), Character.toString(edge[0])));
+      graph.put(edge[0], addToArrayList(graph.get(edge[0]), edge[1]));
+      graph.put(edge[1], addToArrayList(graph.get(edge[1]), edge[0]));
     }
 
     return graph;
   }
 
-  private static ArrayList<String> addToArrayList(ArrayList<String> arrayList, String charToAdd) {
+
+
+  private static ArrayList<Character> addToArrayList(ArrayList<Character> arrayList, char charToAdd) {
     arrayList.add(charToAdd);
     return arrayList;
   }
@@ -87,3 +131,12 @@ public class UndirectedGraphHasPath {
 
 
 // console.log(undirectedPath(edges, "j", "m"));
+
+
+// i=[j, k], 
+// j=[i], 
+// k=[i, m, l], 
+// l=[k], 
+// m=[k], 
+// n=[o], 
+// o=[n]

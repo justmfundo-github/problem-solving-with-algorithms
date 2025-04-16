@@ -4,6 +4,7 @@
 const undirectedPath = (edges, nodeA, nodeB) => {
   // Lets start by building an adjacency graph object
   const graph = buildGraph(edges);
+  console.log(graph);
   return hasPath(graph, nodeA, nodeB, new Set());
 };
 
