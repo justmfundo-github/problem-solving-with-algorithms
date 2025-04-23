@@ -30,10 +30,9 @@ public class ShortestPath{
 
   private static int performBreadthFirstSearch(HashMap<Character, ArrayList<Character>> graph, char startNode, char destinationNode) {
     HashSet<Character> visitedChars = new HashSet<>();
-    int shortPath = 0;
     Queue<CharDistancePair> charQueue = new LinkedList<CharDistancePair>();
     // Start by placing the first node in the queue
-    charQueue.offer(new CharDistancePair(startNode, shortPath));
+    charQueue.offer(new CharDistancePair(startNode, 0));
 
     while(charQueue.size() > 0){
       System.out.println(charQueue.toString());
@@ -54,11 +53,10 @@ public class ShortestPath{
         return currCharDistancePair.getDistance();
       }
 
-      shortPath += 1;
       for(char neighbour : graph.get(currCharDistancePair.getNodeChar())){
         // put each neighbour in the queue
         System.out.println("Dealing with each neighbour.... " + neighbour);
-        charQueue.offer(new CharDistancePair(neighbour, shortPath));
+        charQueue.offer(new CharDistancePair(neighbour, currCharDistancePair.getDistance() + 1));
       }
     }
     return -1;
