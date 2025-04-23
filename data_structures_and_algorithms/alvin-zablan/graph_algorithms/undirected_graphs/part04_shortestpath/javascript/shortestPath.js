@@ -16,19 +16,30 @@ const shortestPath = (edges, nodeA, nodeB) => {
 
 // explore the graph and return the shortest path between the two specified nodes
 const shortestPathExplore = (graph, start, dst, visited) => {
-  // if we've already seen a node, we can't count it again.
-  if (visited.has(start)) return 0;
+  const nodeQueue = [[start, 0]];
 
-  const connectedNodeSize = 0;
+  while (nodeQueue.length > 0) {
+    let [currentNode, shortestPath] = nodeQueue.shift();
+    // if we've already seen a node, we can't count it again.
+    if (visited.has(currentNode)) continue;
 
-  return connectedNodeSize;
+    visited.add(currentNode);
+
+    if (currentNode === dst) return shortestPath;
+
+    for (let neighbour of graph[currentNode]) {
+      nodeQueue.push([neighbour, shortestPath + 1]);
+    }
+  }
+
+  return -1;
 };
 
 const createNodeGraph = (edgesArray) => {
   // we need to traverse the edges, make each unique node a key on the graph and set associated nodes
   const graph = {};
 
-  for (let edge of edges) {
+  for (let edge of edgesArray) {
     const [a, b] = edge;
     if (!(a in graph)) graph[a] = [];
     if (!(b in graph)) graph[b] = [];
