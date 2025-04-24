@@ -1,3 +1,7 @@
+/* Write a function, islandCount, that takes in a grid containing Ws and Ls. 
+   W represents water and L represents land. The function should return the number of 
+   islands on the grid. An island is a vertically or horizontally connected region of land.
+*/
 import java.util.HashSet;
 
 public class IslandCount {
@@ -14,10 +18,10 @@ public class IslandCount {
     HashSet<String> visited = new HashSet<String>();
     int islandCount = 0;
 
-    // System.out.println("Row Length: " + islandArray.length);
-    // System.out.println("Col length: " + islandArray[0].length);
+    // We have to iterate through each cell/node in the grid(two dimensional array)
     for(int row=0; row < islandArray.length; row++){
       for(int col=0; col < islandArray[0].length; col++){
+        //for each node, we need to explore the possible presence of an island 
         if(exploreIsland(islandArray, row, col, visited)){ // -> 3
           islandCount += 1;
         }
