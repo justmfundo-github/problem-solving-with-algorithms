@@ -2,9 +2,11 @@
    Note that this is a directed graph.
 */
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Queue;
 
 public class BreadthFirstPrintGraph {
   public static void main(String[] args) {
@@ -22,13 +24,18 @@ public class BreadthFirstPrintGraph {
 
   private static void breadthFirstTraverseAndPrint(HashMap<String, ArrayList<String>> graph, String startNode) {
     // To perform breadth first traversal, we need to use a queue
-    // Base case(s)
-    System.out.println(startNode);
-    // if(graph.get(startNode).size() <= 0)return;
-    // First pop off the node
-
-    for(String neighbour : graph.get(startNode)){
-      breadthFirstTraverseAndPrint(graph, neighbour);
+    Queue<String> nodeDeqQueue = new ArrayDeque<>();
+    nodeDeqQueue.add(startNode);
+    
+    while(nodeDeqQueue.size() > 0){
+      // First pop off the node
+      String currentNode = nodeDeqQueue.poll();
+      System.out.println(currentNode);
+      // now check this node's neighbours
+      for(String neighbour : graph.get(currentNode)){
+        nodeDeqQueue.add(neighbour);
+      }
     }
+
   }
 }
