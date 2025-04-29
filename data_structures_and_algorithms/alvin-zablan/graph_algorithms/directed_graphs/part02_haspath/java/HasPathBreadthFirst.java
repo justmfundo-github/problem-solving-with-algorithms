@@ -2,15 +2,16 @@
    The function should return a boolean indicating whether or not there exists a path from the source node to the 
    destination node. Note that ACYCLIC means that the graph does not allow you to travel the same paths
    on nodes.
-*/
+*/ 
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Queue;
 
-public class HasPath {
+public class HasPathBreadthFirst {
   public static void main(String[] args) {
-
     HashMap<String, ArrayList<String>> graph = new HashMap<>(); 
     // Creating the graph to work with
     graph.put("f", new ArrayList<String>(Arrays.asList("g", "i")));
@@ -22,24 +23,26 @@ public class HasPath {
 
     String nodeA = "f";
     String nodeB = "k";
-    boolean hasPath = exploreGraphPathDepthFirst(graph, nodeA, nodeB);
+    boolean hasPath = exploreGraphPathBreadthFirst(graph, nodeA, nodeB);
     System.out.println("Path exists between " + nodeA + " and " + nodeB + ":  " + hasPath );
   }
 
-  private static boolean exploreGraphPathDepthFirst(HashMap<String, ArrayList<String>> graph, String startNode, String destNode) {
-    if(startNode.equalsIgnoreCase(destNode)){
-      return true;
-    }
+  private static boolean exploreGraphPathBreadthFirst(HashMap<String, ArrayList<String>> graph, String startNode, String destNode){
 
-    for(String neighbour : graph.get(startNode)){
-      // Note that as soon as one of the recursives returns true we need to exit the function and return true
-      // If there is a path to the destination, then our work is done. Hence the call to recursive is wrapped
-      // in an if statement checking for "true"
-      if(exploreGraphPathDepthFirst(graph, neighbour, destNode) == true){
+    Queue<String> nodeDequeQueue = new ArrayDeque<String>();    
+    nodeDequeQueue.add(startNode);
+
+    while (nodeDequeQueue.size() > 0){
+      String currentNode = nodeDequeQueue.poll();
+      if(currentNode == destNode){
         return true;
       }
-    }
+      for(String neighbour : graph.get(currentNode)){
+        nodeDequeQueue.add(neighbour);
+      }
 
+    }
+  
     return false;
   }
 }
